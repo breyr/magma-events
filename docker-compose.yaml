@@ -1,0 +1,30 @@
+version: "3"
+services:
+  db:
+    image: mysql:latest
+    env_file: .env
+    # .env must contain MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - php_mysql_data:/var/lib/mysql
+  www:
+    image: breyr/php-apache-mysqli:latest
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - db
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_ARBITRARY=1
+    depends_on:
+      - db
+volumes:
+  php_mysql_data:
