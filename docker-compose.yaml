@@ -2,12 +2,14 @@ version: "3"
 services:
   db:
     image: mysql:latest
-    env_file: .env
-    # .env must contain MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD=1
+    env_file:
+      - .env
     volumes:
       - php_mysql_data:/var/lib/mysql
   www:
     image: breyr/php-apache-mysqli:latest
+    env_file:
+      - .env
     volumes:
       - ./src:/var/www/html
     ports:
