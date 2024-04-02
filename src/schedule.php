@@ -1,6 +1,12 @@
 <?php 
     // Schedule view for non-admin users
     session_start();
+    // Check if the session variable is set
+    if (!isset($_SESSION['username'])) {
+        // Redirect to index page
+        header('Location: index.php');
+        exit();
+    }
     // connect to database
     include('./scripts/connect.php'); 
 ?>
