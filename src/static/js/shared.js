@@ -95,3 +95,44 @@ $('#submit-vacation-request').on('click', function (e) {
         }
     })
 });
+
+// handle admin actions for vacation requests
+$('.approve, .deny').click(function () {
+    // get row id, action, and row
+    const rowId = $(this).closest('tr').find('td:first').text();
+    const action = $(this).hasClass('approve') ? 'approve' : 'deny';
+    const row = $(this).closest('tr');
+
+    // ajax request
+    $.ajax({
+        "url": "./scripts/handleVacationAdminAction.php",
+        "type": "post",
+        "data": {
+            "id": rowId,
+            "action": action,
+        },
+        success: function (res) {
+            // generate a unique ID for the toast
+            var toastId = 'toast' + Date.now();
+
+            // append the toast to the toast container
+            $('#toast-container')
+                .append(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="${toastId}"><div class="toast-header">
+                <strong class="me-auto text-success">Success</strong>
+                <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true"></span>
+                </button>
+              </div>
+              <div class="toast-body">
+              Vacation request ${action} submitted successfully.
+              </div>
+              </div>`);
+
+            // show the toast
+            $('#' + toastId).toast('show');
+
+            // delete the table row
+            row.remove();
+        }
+    })
+});

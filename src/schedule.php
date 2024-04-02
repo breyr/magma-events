@@ -44,13 +44,14 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $uname = $_SESSION['username'];
-                                    $sql = "SELECT *
-                                    FROM Events
-                                    JOIN Event_Participants
-                                    ON Events.event_name = Event_Participants.event_name
-                                    WHERE Event_Participants.username = '$uname';";
-                                    $result = $conn->query($sql);
+                                $uname = $_SESSION['username'];
+                                $sql = "SELECT *
+                                        FROM Events
+                                        JOIN Event_Participants
+                                        ON Events.event_name = Event_Participants.event_name
+                                        WHERE Event_Participants.username = '$uname';";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows > 0) {
                                     while($row=$result->fetch_assoc()){
                                 ?>
                                 <tr>
@@ -66,6 +67,11 @@
                                             <i class="fa-solid fa-map-pin"></i> Get Directions
                                         </a>
                                     </td>
+                                </tr>
+                                <?php } ?>
+                                <?php } else {?>
+                                <tr class="text-center fst-italix">
+                                    <td colspan='7'>No events scheduled</td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
