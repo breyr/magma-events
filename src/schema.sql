@@ -53,7 +53,7 @@ CREATE TABLE VacationRequests (
 );
 
 INSERT INTO Users (username, password, role, firstname, lastname) VALUES 
-('vc2222', 'M4gm4.Adm1n', 'Admin', 'Vint', 'Cerf'),
+('vc0000', 'M4gm4.Adm1n', 'Admin', 'Vint', 'Cerf'),
 ('dd2222', 'S3r:v3r5', 'Server', 'David', 'Dobrik'),
 ('jd5554', 'S3r:v3r5', 'Server', 'Jimmy', 'Donaldson'),
 ('te8495', 'S3r:v3r5', 'Server', 'Tannar', 'Eacott'),
@@ -76,7 +76,7 @@ INSERT INTO Users (username, password, role, firstname, lastname) VALUES
 ('ar3524', 'Pr3-p4r3rs', 'Preparer', 'Addison', 'Rae');
 
 INSERT INTO Admins (username, phone) VALUES 
-('vc2222', '212-555-0000');
+('vc0000', '212-555-0000');
 
 INSERT INTO Servers (username, phone, rate, vacation_days) VALUES 
 ('dd2222', '610-555-2222', 11.03, '7/20-7/22'),
