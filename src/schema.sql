@@ -40,6 +40,16 @@ CREATE TABLE Event_Participants (
     FOREIGN KEY (username) REFERENCES Users(username)
 );
 
+CREATE TABLE VacationRequests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    reason TEXT NOT NULL,
+    request_status ENUM('Pending', 'Approved', 'Denied') DEFAULT 'Pending',
+    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO Users (username, password, role) VALUES
 ('vc', 'M4gm4.Adm1n', 'Admin'),
 ('dd2222', 'S3r:v3r5', 'Server'),

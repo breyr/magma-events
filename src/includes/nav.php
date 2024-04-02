@@ -14,14 +14,14 @@
                 ?>
                 <?php if($_SESSION['role'] == 'Admin') { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/views/admin.php">Admin Panel
-                    </a>
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'admin.php' ? 'active' : ''; ?>"
+                        href="admin.php">Admin Panel</a>
                 </li>
                 <?php } ?>
                 <?php if ($_SESSION['role'] == 'Preparer' || $_SESSION['role'] == 'Server') { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/views/schedule.php">My Schedule
-                    </a>
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'schedule.php' ? 'active' : ''; ?>"
+                        href="schedule.php">My Schedule</a>
                 </li>
                 <?php } ?>
                 <?php } ?>

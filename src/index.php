@@ -9,7 +9,7 @@
     <?php include("./includes/head.php"); ?>
 </head>
 
-<body class="homepage-body d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100">
     <!-- import nav bar -->
     <?php include("./includes/nav.php"); ?>
     <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">

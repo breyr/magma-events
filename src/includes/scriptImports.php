@@ -8,4 +8,4 @@
 <!-- font awesome icons -->
 <script src="https://kit.fontawesome.com/4137f8921b.js" crossorigin="anonymous"></script>
 <!-- custom jquery logic -->
-<script src="../static/js/main.js"></script>
+<script src="../static/js/shared.js"></script>
