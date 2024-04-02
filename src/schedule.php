@@ -68,8 +68,6 @@
                                     </td>
                                 </tr>
                                 <?php } ?>
-
-                                <!-- Repeat for each row in your database -->
                             </tbody>
                         </table>
                     </div>
