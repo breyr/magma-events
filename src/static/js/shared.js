@@ -51,16 +51,16 @@ $('#submit-vacation-request').on('click', function (e) {
     const reason = $('#reason').val();
 
     // get start and end date
-    startDate = new Date(startDate);
+    startDate = new Date(startDate + 'T00:00:00Z');
 
     // format start date in 'month/day' format
-    const formattedStartDate = (startDate.getMonth() + 1) + '/' + startDate.getDate();
+    const formattedStartDate = (startDate.getUTCMonth() + 1) + '/' + startDate.getUTCDate();
     let formattedEndDate = '';
 
     // check if end date is not empty
     if (endDate) {
-        endDate = new Date(endDate);
-        formattedEndDate = (endDate.getMonth() + 1) + '/' + endDate.getDate();
+        endDate = new Date(endDate + 'T00:00:00Z');
+        formattedEndDate = (endDate.getUTCMonth() + 1) + '/' + endDate.getUTCDate();
     }
 
     // concatenate dates with '-'
