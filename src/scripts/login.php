@@ -17,6 +17,8 @@
         $row = $res->fetch_assoc();
         // set session variables
         $_SESSION['username'] = $row['username'];
+        $_SESSION['firstname'] = $row['firstname'];
+        $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['role'] = $row['role'];
     } else {
         http_response_code(400);

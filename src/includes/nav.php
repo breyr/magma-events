@@ -28,13 +28,14 @@
             </ul>
             <div class="d-flex align-items-center">
                 <?php 
-                    if(!isset($_SESSION['username'])) {
+                    if(!isset($_SESSION['firstname'])) {
                 ?>
                 <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#loginModal">log
                     in</button>
                 <?php } else { ?>
                 <div class="d-flex align-items-center gap-2">
-                    <p class="mb-0 text-black"><i class="fa-regular fa-user"></i> <?php echo $_SESSION['username'];  ?>
+                    <p class="mb-0 text-black"><i class="fa-regular fa-user"></i>
+                        <?php echo $_SESSION['firstname'].' '.$_SESSION['lastname'];  ?>
                     </p>
                     <button class="btn btn-outline-warning" id="submit-logout-btn">log
                         out</button>
