@@ -3,16 +3,14 @@
         private $username;
         private $fname;
         private $lname;
-        private $startDate;
-        private $endDate;
+        private $vacationDays;
         private $reason;
     
-        public function __construct($username, $fname, $lname, $startDate, $endDate, $reason) {
+        public function __construct($username, $fname, $lname, $vacationDays, $reason) {
             $this->username = $username;
             $this->fname = $fname;
             $this->lname = $lname;
-            $this->startDate = $startDate;
-            $this->endDate = $endDate;
+            $this->vacationDays = $vacationDays;
             $this->reason = $reason;
         }
     

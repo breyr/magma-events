@@ -51,8 +51,7 @@
                                     <th scope="col">Username</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
+                                    <th scope="col">Vacation Days</th>
                                     <th scope="col">Reason</th>
                                     <th scope="col">Request Status</th>
                                     <th scope="col">Request Date</th>
@@ -72,8 +71,7 @@
                                     <td><?php echo $row['username']; ?></td>
                                     <td><?php echo $row['first_name']; ?></td>
                                     <td><?php echo $row['last_name']; ?></td>
-                                    <td><?php echo $row['start_date']; ?></td>
-                                    <td><?php echo $row['end_date']; ?></td>
+                                    <td><?php echo $row['vacation_days']; ?></td>
                                     <td><?php echo $row['reason']; ?></td>
                                     <td><?php echo $row['request_status']; ?></td>
                                     <td><?php echo $row['request_date']; ?></td>

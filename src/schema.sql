@@ -47,8 +47,7 @@ CREATE TABLE VacationRequests (
     username VARCHAR(255) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
+    vacation_days VARCHAR(255) NOT NULL,
     reason TEXT NOT NULL,
     request_status ENUM('Pending', 'Approved', 'Denied') DEFAULT 'Pending',
     request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP

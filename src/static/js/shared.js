@@ -46,16 +46,33 @@ $('#submit-logout-btn').on('click', function () {
 $('#submit-vacation-request').on('click', function (e) {
     e.preventDefault();
     // get info
-    const startDate = $('#start-date').val();
-    const endDate = $('#end-date').val();
+    let startDate = $('#start-date').val();
+    let endDate = $('#end-date').val();
     const reason = $('#reason').val();
+
+    // get start and end date
+    startDate = new Date(startDate);
+
+    // format start date in 'month/day' format
+    const formattedStartDate = (startDate.getMonth() + 1) + '/' + startDate.getDate();
+    let formattedEndDate = '';
+
+    // check if end date is not empty
+    if (endDate) {
+        endDate = new Date(endDate);
+        formattedEndDate = (endDate.getMonth() + 1) + '/' + endDate.getDate();
+    }
+
+    // concatenate dates with '-'
+    const vacationDays = formattedEndDate ? formattedStartDate + '-' + formattedEndDate : formattedStartDate;
+    console.log(vacationDays);
     // check if all fields are filled out
-    if (!startDate || !endDate || !reason) {
+    if (!startDate || !reason) {
         alert('Please fill out all fields.');
         return;
     }
     // make sure start date is before end date
-    if (startDate >= endDate) {
+    if (endDate && startDate >= endDate) {
         alert('Start date must be before end date.');
         return;
     }
@@ -64,8 +81,7 @@ $('#submit-vacation-request').on('click', function (e) {
         url: "./scripts/handleVacationRequest.php",
         method: "post",
         data: {
-            "startDate": startDate,
-            "endDate": endDate,
+            "vacationDays": vacationDays,
             "reason": reason
         },
         success: function (res) {
@@ -99,17 +115,21 @@ $('#submit-vacation-request').on('click', function (e) {
 // handle admin actions for vacation requests
 $('.approve, .deny').click(function () {
     // get row id, action, and row
+    // get row id, action, and row
     const rowId = $(this).closest('tr').find('td:first').text();
     const action = $(this).hasClass('approve') ? 'approve' : 'deny';
     const row = $(this).closest('tr');
-
+    const vacationDays = $(this).closest('tr').find('td').eq(4).text();
+    const username = $(this).closest('tr').find('td').eq(1).text();
     // ajax request
     $.ajax({
         "url": "./scripts/handleVacationAdminAction.php",
         "type": "post",
         "data": {
             "id": rowId,
+            "username": username,
             "action": action,
+            "vacationDays": vacationDays
         },
         success: function (res) {
             // generate a unique ID for the toast

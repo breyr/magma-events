@@ -97,9 +97,8 @@
                                     <input type="date" class="form-control" id="start-date" name="start_date" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="end-date" class="form-label">End Date <span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="end-date" name="end_date" required>
+                                    <label for="end-date" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="end-date" name="end_date">
                                 </div>
                                 <div class="mb-3">
                                     <label for="reason" class="form-label">Reason <span
