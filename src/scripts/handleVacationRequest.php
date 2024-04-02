@@ -7,23 +7,27 @@
     include('../models/VacationRequest.php');
 
     // get the values from the form submission or from variables
-    $username = $_SESSION['username']; // assuming the username is stored in a session variable
-    $startDate = $_POST['startDate']; // replace 'start_date' with the name of your form field
-    $endDate = $_POST['endDate']; // replace 'end_date' with the name of your form field
-    $reason = $_POST['reason']; // replace 'reason' with the name of your form field
+    $username = $_SESSION['username']; 
+    $fname = $_SESSION['firstname'];
+    $lname = $_SESSION['lastname'];
+    $startDate = $_POST['startDate']; 
+    $endDate = $_POST['endDate']; 
+    $reason = $_POST['reason']; 
 
     // create a new instance of the VacationRequest class
-    $vacationRequest = new VacationRequest($username, $startDate, $endDate, $reason);
+    $vacationRequest = new VacationRequest($username, $fname, $lname, $startDate, $endDate, $reason);
 
     // get the values from the VacationRequest object
-    $username = $vacationRequest->getUsername();
-    $startDate = $vacationRequest->getStartDate();
-    $endDate = $vacationRequest->getEndDate();
-    $reason = $vacationRequest->getReason();
+    $username = $vacationRequest->username;
+    $fname = $vacationRequest->fname;
+    $lname = $vacationRequest->lname;
+    $startDate = $vacationRequest->startDate;
+    $endDate = $vacationRequest->endDate;
+    $reason = $vacationRequest->reason;
 
     // prepare the SQL statement
-    $stmt = $conn->prepare("INSERT INTO VacationRequests (username, start_date, end_date, reason) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $username, $startDate, $endDate, $reason);
+    $stmt = $conn->prepare("INSERT INTO VacationRequests (username, first_name, last_name, start_date, end_date, reason) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $username, $fname, $lname, $startDate, $endDate, $reason);
 
     // execute the SQL statement
     if ($stmt->execute()) {
