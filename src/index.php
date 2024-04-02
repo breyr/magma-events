@@ -1,25 +1,22 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAMP Stack Docker</title>
-    <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- custom css -->
-    <link href="./static/css/custom.css" rel="stylesheet">
+    <title>Magma Events - Home</title>
+    <?php include("./includes/head.php"); ?>
 </head>
-<body>
-    <!-- connect to database -->
-    <?php include("./includes/connect.php"); ?>
 
-
-
-    <!-- bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<body class="homepage-body d-flex flex-column vh-100">
+    <!-- import nav bar -->
+    <?php include("./includes/nav.php"); ?>
+    <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+        <h1 class="gradient-text"><i class="fa-solid fa-fire"></i> <span class="fw-bold">Magma Events</span></h1>
+        <p class="tagline">Igniting Exceptional Experiences</p>
+    </main>
+    <?php include('./includes/scriptImports.php'); ?>
 </body>
+
 </html>

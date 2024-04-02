@@ -1,0 +1,28 @@
+/* 
+    maroon: #3B101B;
+*/
+
+h1 {
+    font-size: 5em; /* Adjust as needed */
+}
+
+p {
+    font-size: 1.2em; /* Adjust as needed */
+}
+
+.tagline {
+    color: rgba(152, 5, 5, 0.5);
+}
+
+.navbar-brand {
+    color: orangered;
+}
+.navbar-brand:hover {
+    color: orange;
+}
+
+.gradient-text {
+    background: -webkit-linear-gradient(45deg, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

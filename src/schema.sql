@@ -1,6 +1,7 @@
 CREATE TABLE Users (
     username VARCHAR(20) PRIMARY KEY,
-    password VARCHAR(20) NOT NULL
+    password VARCHAR(20) NOT NULL,
+    role ENUM('Admin', 'Server', 'Preparer') NOT NULL
 );
 
 CREATE TABLE Admins (
@@ -39,24 +40,24 @@ CREATE TABLE Event_Participants (
     FOREIGN KEY (username) REFERENCES Users(username)
 );
 
-INSERT INTO Users (username, password) VALUES
-('vc', 'M4gm4.Adm1n'),
-('dd2222', 'S3r:v3r5'),
-('jd5555', 'S3r:v3r5'),
-('te9495', 'S3r:v3r5'),
-('fk9008', 'S3r:v3r5'),
-('lk2313', 'S3r:v3r5'),
-('jv0948', 'S3r:v3r5'),
-('ls2313', 'S3r:v3r5'),
-('tt1111', 'S3r:v3r5'),
-('cd1323', 'Pr3-p4r3rs'),
-('lg1123', 'Pr3-p4r3rs'),
-('kh0448', 'Pr3-p4r3rs'),
-('ch4223', 'Pr3-p4r3rs'),
-('zk6672', 'Pr3-p4r3rs'),
-('sk3340', 'Pr3-p4r3rs'),
-('am8790', 'Pr3-p4r3rs'),
-('ar3524', 'Pr3-p4r3rs');
+INSERT INTO Users (username, password, role) VALUES
+('vc', 'M4gm4.Adm1n', 'Admin'),
+('dd2222', 'S3r:v3r5', 'Server'),
+('jd5555', 'S3r:v3r5', 'Server'),
+('te9495', 'S3r:v3r5', 'Server'),
+('fk9008', 'S3r:v3r5', 'Server'),
+('lk2313', 'S3r:v3r5', 'Server'),
+('jv0948', 'S3r:v3r5', 'Server'),
+('ls2313', 'S3r:v3r5', 'Server'),
+('tt1111', 'S3r:v3r5', 'Server'),
+('cd1323', 'Pr3-p4r3rs', 'Preparer'),
+('lg1123', 'Pr3-p4r3rs', 'Preparer'),
+('kh0448', 'Pr3-p4r3rs', 'Preparer'),
+('ch4223', 'Pr3-p4r3rs', 'Preparer'),
+('zk6672', 'Pr3-p4r3rs', 'Preparer'),
+('sk3340', 'Pr3-p4r3rs', 'Preparer'),
+('am8790', 'Pr3-p4r3rs', 'Preparer'),
+('ar3524', 'Pr3-p4r3rs', 'Preparer');
 
 INSERT INTO Admins (username, phone) VALUES
 ('vc', '212-555-0000');
@@ -98,4 +99,4 @@ INSERT INTO Event_Participants (event_name, username, role) VALUES
 ('Comic-Con @ San Diego Convention Center', 'lk2313', 'Server'),
 ('Comic-Con @ San Diego Convention Center', 'tt1111', 'Server'),
 ('Comic-Con @ San Diego Convention Center', 'kh0448', 'Preparer'),
-('Comic-Con @ San Diego Convention Center', 'am8790',
+('Comic-Con @ San Diego Convention Center', 'am8790', 'Preparer');
