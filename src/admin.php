@@ -158,7 +158,7 @@
                                                 $eventCounts[$eventName]['cost'] += $row['rate'];
                                             } else {
                                                 if($on_vacation) {
-                                                    echo '<td class="bg-dark"></td>';
+                                                    echo '<td class="bg-dark blackout-cell"></td>';
                                                 } else {
                                                     echo '<td class="bg-secondary-subtle interactive-cell"></td>';
                                                 }
