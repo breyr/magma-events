@@ -147,7 +147,7 @@
                                             }
                                         
                                             if($data['count'] > 0 && !$on_vacation) {
-                                                echo '<td class="text-center bg-success" style="border-right: 1px solid #DFD8CA;cursor: pointer"></td>';
+                                                echo '<td class="bg-success interactive-cell"></td>';
                                                 $evtCount++;
                                                 if($row['role'] == 'Preparer') {
                                                     $eventCounts[$eventName]['prep']++;
@@ -158,9 +158,9 @@
                                                 $eventCounts[$eventName]['cost'] += $row['rate'];
                                             } else {
                                                 if($on_vacation) {
-                                                    echo '<td class="text-center" style="background-color: black; border-right: 1px solid #DFD8CA;cursor: pointer"></td>';
+                                                    echo '<td class="bg-dark interactive-cell"></td>';
                                                 } else {
-                                                    echo '<td class="text-center bg-secondary-subtle" style="border-right: 1px solid #DFD8CA;cursor: pointer"></td>';
+                                                    echo '<td class="bg-secondary-subtle interactive-cell"></td>';
                                                 }
                                             }
                                         }

@@ -42,3 +42,12 @@ p {
 .non-participant {
     background-color: lightgray;
 }
+
+.interactive-cell {
+    border: 1px solid #DFD8CA;
+}
+
+.interactive-cell:hover {
+    border: 3px dashed blue;
+    cursor: pointer;
+}
