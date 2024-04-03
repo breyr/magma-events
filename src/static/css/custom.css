@@ -26,3 +26,19 @@ p {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.border-right {
+    border-right: 1px solid #DFD8CA;
+}
+
+.border-left {
+    border-left: 1px solid #DFD8CA;
+}
+
+.event-participant {
+    background-color: green;
+}
+
+.non-participant {
+    background-color: lightgray;
+}

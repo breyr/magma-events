@@ -56,9 +56,8 @@
             <div class="modal-body">
                 <div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="username" name="username"
-                            placeholder="name@example.com">
-                        <label for="username">Email address</label>
+                        <input type="email" class="form-control" id="username" name="username" placeholder="sd9889">
+                        <label for="username">Username</label>
                     </div>
                     <div class="form-floating">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password"
