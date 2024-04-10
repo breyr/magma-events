@@ -312,38 +312,31 @@ include "./scripts/connect.php";
 
     <?php include "./includes/scriptImports.php"; ?>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get all interactive cells
-            const interactiveCells = document.querySelectorAll('.interactive-cell');
-
+        $(document).ready(function () {
             // Add click event listener to each interactive cell
-            interactiveCells.forEach(function (cell) {
-                cell.addEventListener('click', function () {
+            $('.interactive-cell').each(function() {
+                let cell = $(this);
+                cell.click(function() {
                     // Toggle cell color
-                    if (cell.classList.contains('bg-success')) {
-                        cell.classList.remove('bg-success');
-                        cell.classList.add('bg-secondary-subtle');
+                    if (cell.hasClass('bg-success')) {
+                        cell.removeClass('bg-success').addClass('bg-secondary-subtle');
                     } else {
-                        cell.classList.remove('bg-secondary-subtle');
-                        cell.classList.add('bg-success');
+                        cell.removeClass('bg-secondary-subtle').addClass('bg-success');
                     }
 
                     // Update counts
                     // pass in true if cell is green, false if grey
                     // also pass in reference to the cell that was clicked;
-                    updateCounts(cell.classList.contains('bg-success'), cell);
+                    updateCounts(cell.hasClass('bg-success'), cell);
 
                     // Extract relevant data
-                    const username = cell.parentNode.cells[0].getAttribute('data-username');
+                    const username = cell.parent().find('td:first').attr('data-username');
                     // get the name of the event from the header row
-                    const eventName = cell
-                        .closest('table')
-                        .querySelector('thead th:nth-child(' + (cell.cellIndex) + ')')
-                        .getAttribute('data-event-name');
+                    const eventName = cell.closest('table').find('thead th:nth-child(' + (cell.index() + 1) + ')').attr('data-event-name');
 
                     // Update database
-                    const newRecord = cell.classList.contains('bg-success') ? true : false;
-                    const role = cell.classList.contains('Preparer') ? 'Preparer' : 'Server';
+                    const newRecord = cell.hasClass('bg-success') ? true : false;
+                    const role = cell.hasClass('Preparer') ? 'Preparer' : 'Server';
                     updateDatabase(newRecord, username, eventName, role);
                 });
             });
@@ -357,9 +350,9 @@ include "./scripts/connect.php";
                 // which is just the row that we clicked
 
                 // for each row, count the number of bg-success cells for the row in which we clicked and update total events
-                var row = $(cell).parent().get(0);
-                var eventCells = $(row).find('.interactive-cell');
-                var totalEvents = 0;
+                let row = $(cell).parent().get(0);
+                const eventCells = $(row).find('.interactive-cell');
+                let totalEvents = 0;
                 eventCells.each(function() {
                     if ($(this).hasClass('bg-success')) {
                         totalEvents++;
@@ -368,21 +361,23 @@ include "./scripts/connect.php";
                 // update total events for the user, last cell in row
                 $(row.cells[row.cells.length - 1]).text(totalEvents);
 
+                // get index of the current cell in the row
+                const cellIndex = cell.index();
                 // find whether this was a prep or serve cell
-                var cellType = $(cell).hasClass('Preparer') ? 'prep' : 'serve';
+                const cellType = $(cell).hasClass('Preparer') ? 'prep' : 'serve';
                 // find the event for the cell, the event is the the th in the same column as the cell
                 // needs to be minus one because the fourth td is hidden which holds the amount the person is making
                 // get the id
-                var eventId = $(cell).parent().parent().parent().find('thead').find('tr').eq(0).find('th').eq(cell.cellIndex - 1).attr('id').trim();
+                const eventId = $(cell).parent().parent().parent().find('thead').find('tr').eq(0).find('th').eq(cellIndex - 1).attr('id').trim();
                 // need to count how many cells are green for each event, update the total count for preparers and servers, but also update the total cost which can be calulated by getting the fourth column in the table for each row that is green
-                var counts = {
+                let counts = {
                     prep: 0,
                     serve: 0,
                     staff: 0,
                     cost: 0
                 };
                 // get all the cells for the column cell.cellIndex + 1
-                var cells = $(cell).parent().parent().find('td:nth-child(' + (cell.cellIndex + 1) + ')');
+                const cells = $(cell).parent().parent().find('td:nth-child(' + (cellIndex + 1) + ')');
                 cells.each(function() {
                     if ($(this).hasClass('bg-success')) {
                         if ($(this).hasClass('Preparer')) {
@@ -396,7 +391,6 @@ include "./scripts/connect.php";
                     }
                 });
                 // update the counts for the event, event-prepcount, event-servecount, event-staffcount, event-cost
-                console.log('#' + eventId + '-prepcount');
                 $('#' + eventId + '-prepcount').text(counts.prep);
                 $('#' + eventId + '-servecount').text(counts.serve);
                 $('#' + eventId + '-staffcount').text(counts.staff);
