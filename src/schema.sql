@@ -37,9 +37,7 @@ CREATE TABLE Events (
 CREATE TABLE Event_Participants (
     event_name VARCHAR(100),
     username VARCHAR(20),
-    role ENUM('Server', 'Preparer'),
-    FOREIGN KEY (event_name) REFERENCES Events(event_name),
-    FOREIGN KEY (username) REFERENCES Users(username)
+    role ENUM('Server', 'Preparer')
 );
 
 CREATE TABLE VacationRequests (
@@ -53,7 +51,7 @@ CREATE TABLE VacationRequests (
     request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO Users (username, password, role, firstname, lastname) VALUES 
+INSERT INTO Users (username, password, role, firstname, lastname) VALUES
 ('vc0000', 'M4gm4.Adm1n', 'Admin', 'Vint', 'Cerf'),
 ('dd2222', 'S3r:v3r5', 'Server', 'David', 'Dobrik'),
 ('jd5554', 'S3r:v3r5', 'Server', 'Jimmy', 'Donaldson'),
@@ -76,10 +74,10 @@ INSERT INTO Users (username, password, role, firstname, lastname) VALUES
 ('am8790', 'Pr3-p4r3rs', 'Preparer', 'Ariel', 'Martin'),
 ('ar3524', 'Pr3-p4r3rs', 'Preparer', 'Addison', 'Rae');
 
-INSERT INTO Admins (username, phone) VALUES 
+INSERT INTO Admins (username, phone) VALUES
 ('vc0000', '212-555-0000');
 
-INSERT INTO Servers (username, phone, rate, vacation_days) VALUES 
+INSERT INTO Servers (username, phone, rate, vacation_days) VALUES
 ('dd2222', '610-555-2222', 11.03, '7/20-7/22'),
 ('jd5554', '610-555-5463', 9.45, '7/1-7/3'),
 ('te8495', '484-555-8495', 10.43, '7/16-7/19'),
@@ -87,13 +85,13 @@ INSERT INTO Servers (username, phone, rate, vacation_days) VALUES
 ('lk3392', '212-555-3392', 11.50, '7/6, 7/9, 7/18'),
 ('jv0948', '609-555-0948', 11.04, '7/21-7/27'),
 ('jm5445', '484-555-5445', 10.61, '7/15'),
-('rm4476', '248-555-4476', 10.22, '7/4 - 7/8'),
+('rm4476', '248-555-4476', 10.22, '7/4-7/8'),
 ('jm3245', '717-555-3245', 9.87, '7/17, 7/19, 7/20'),
 ('ln3333', '267-555-3333', 9.55, '7/15'),
 ('ls2313', '215-555-2313', 10.54, NULL),
 ('tt1111', '215-555-1111', 10.25, '7/1-7/5');
 
-INSERT INTO Preparers (username, phone, rate, vacation_days) VALUES 
+INSERT INTO Preparers (username, phone, rate, vacation_days) VALUES
 ('cd1323', '267-555-1323', 15.37, '7/3-7/6'),
 ('lg1123', '212-555-1123', 15.78, '7/12, 7/16, 7/20'),
 ('kh0448', '484-555-0448', 15.25, '7/26-7/31'),
@@ -103,7 +101,7 @@ INSERT INTO Preparers (username, phone, rate, vacation_days) VALUES
 ('am8790', '267-555-8790', 15.44, '7/26'),
 ('ar3524', '610-555-3524', 14.68, '7/7-7/11');
 
-INSERT INTO Events (event_name, venue_address, venue_phone, organizer_email, date, duration_hours) VALUES 
+INSERT INTO Events (event_name, venue_address, venue_phone, organizer_email, date, duration_hours) VALUES
 ('Comic-Con @ San Diego Convention Center', '111 W. Harbor Drive', '619-525-5000', 'founder@detroitcomics.com', '2024-07-18', 6.0),
 ('E3 @ Los Angeles Convention Center', '1202 S. Figueroa Street', '213-741-1151', 'ceo@esa.com', '2024-07-09', 5.0),
 ('MegaCon @ Orange County Convention Center', '9800 International Drive', '407-685-9800', 'superhero@marvel.com', '2024-07-05', 2.0),
@@ -112,7 +110,7 @@ INSERT INTO Events (event_name, venue_address, venue_phone, organizer_email, dat
 ('VidCon @ Anaheim Convention Center', '800 W. Katella Avenue', '714-765-8950', 'wmgates@microsoft.com', '2024-07-01', 4.0),
 ('WOAHX TikTok Conference @ Rio All-Suites Hotel and Casino', '3700 W. Flamingo Road', '619-546-0621', 'founder@tiktok.com', '2024-07-15', 3.5);
 
-INSERT INTO Event_Participants (event_name, username, role) VALUES 
+INSERT INTO Event_Participants (event_name, username, role) VALUES
 ('Comic-Con @ San Diego Convention Center', 'dd2222', 'Server'),
 ('Comic-Con @ San Diego Convention Center', 'fk9008', 'Server'),
 ('Comic-Con @ San Diego Convention Center', 'lk3392', 'Server'),
