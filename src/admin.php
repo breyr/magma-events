@@ -332,8 +332,8 @@ include "./scripts/connect.php";
                     // Extract relevant data
                     const username = cell.parent().find('td:first').attr('data-username');
                     // get the name of the event from the header row
-                    const eventName = cell.closest('table').find('thead th:nth-child(' + (cell.index() + 1) + ')').attr('data-event-name');
-
+                    const eventName = cell.closest('table').find('thead th:nth-child(' + (cell.index()) + ')').attr('data-event-name');
+                    console.log(eventName);
                     // Update database
                     const newRecord = cell.hasClass('bg-success') ? true : false;
                     const role = cell.hasClass('Preparer') ? 'Preparer' : 'Server';
