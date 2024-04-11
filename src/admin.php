@@ -44,7 +44,8 @@ include "./scripts/connect.php";
                                     <th scope="col">Phone #</th>
                                     <th scope="col" style="border-right: 1px solid #DFD8CA;">Role</th>
                                     <?php
-                                    $sql = "SELECT DISTINCT(event_name), date FROM Events ORDER BY date, event_name";
+                                    $sql =
+                                        "SELECT DISTINCT(event_name), duration_hours, date FROM Events ORDER BY date, event_name";
                                     $result = $conn->query($sql);
                                     $eventNames = [];
                                     while ($row = $result->fetch_assoc()) {
@@ -56,6 +57,8 @@ include "./scripts/connect.php";
                                             $eName .
                                             '" id="' .
                                             $first .
+                                            '" data-event-hours="' .
+                                            $row["duration_hours"] .
                                             '">' .
                                             $first .
                                             "<br>" .
@@ -122,7 +125,7 @@ include "./scripts/connect.php";
                                     $evtCount = 0;
                                     foreach ($eventNames as $eventName) {
                                         // Fetch the event date
-                                        $sql = "SELECT date FROM Events WHERE event_name = ?";
+                                        $sql = "SELECT date, duration_hours FROM Events WHERE event_name = ?";
                                         $stmt = $conn->prepare($sql);
                                         $stmt->bind_param("s", $eventName);
                                         $stmt->execute();
@@ -187,7 +190,9 @@ include "./scripts/connect.php";
                                                 $eventCounts[$eventName]["server"]++;
                                             }
                                             $eventCounts[$eventName]["total"]++;
-                                            $eventCounts[$eventName]["cost"] += $row["rate"];
+                                            // row["rate"] needs to be multiplied by the duration of the event and then added
+                                            $cost = $row["rate"] * $event["duration_hours"];
+                                            $eventCounts[$eventName]["cost"] += $cost;
                                         } else {
                                             if ($on_vacation) {
                                                 echo "<td class='bg-dark blackout-cell $previousRole'></td>";
@@ -333,7 +338,6 @@ include "./scripts/connect.php";
                     const username = cell.parent().find('td:first').attr('data-username');
                     // get the name of the event from the header row
                     const eventName = cell.closest('table').find('thead th:nth-child(' + (cell.index()) + ')').attr('data-event-name');
-                    console.log(eventName);
                     // Update database
                     const newRecord = cell.hasClass('bg-success') ? true : false;
                     const role = cell.hasClass('Preparer') ? 'Preparer' : 'Server';
@@ -387,7 +391,9 @@ include "./scripts/connect.php";
                         }
                         counts.staff++;
                         // cost needs to be a floating point number to two decimal places
-                        counts.cost += parseFloat($(this).parent().find('td').eq(3).text());
+                        // get the duration of the event from the event th
+                        const duration = parseFloat($('#' + eventId).attr('data-event-hours'));
+                        counts.cost +=parseFloat(duration * $(this).parent().find('td').eq(3).text());
                     }
                 });
                 // update the counts for the event, event-prepcount, event-servecount, event-staffcount, event-cost
