@@ -45,7 +45,7 @@ include "./scripts/connect.php";
                                     <th scope="col" style="border-right: 1px solid #DFD8CA;">Role</th>
                                     <?php
                                     $sql =
-                                        "SELECT DISTINCT(event_name), duration_hours, date FROM Events ORDER BY date, event_name";
+                                        "SELECT DISTINCT(event_name), duration_hours, date, venue_address, venue_phone, organizer_email FROM Events ORDER BY date, event_name";
                                     $result = $conn->query($sql);
                                     $eventNames = [];
                                     while ($row = $result->fetch_assoc()) {
@@ -53,6 +53,7 @@ include "./scripts/connect.php";
                                         array_push($eventNames, $eName);
                                         $eventNameParts = explode(" ", $eName);
                                         $first = $eventNameParts[0];
+                                        // add tooltip for event info - contact name, phone, and location
                                         echo '<th scope="col" class="text-center" data-event-name="' .
                                             $eName .
                                             '" id="' .
@@ -63,6 +64,13 @@ include "./scripts/connect.php";
                                             $first .
                                             "<br>" .
                                             $row["date"] .
+                                            "<br><i class='bi bi-info-circle' data-bs-toggle='tooltip'' data-bs-html='true' data-bs-title='" .
+                                            $row["venue_address"] .
+                                            "<br>" .
+                                            $row["venue_phone"] .
+                                            "<br>" .
+                                            $row["organizer_email"] .
+                                            "'></i>" .
                                             "</th>";
                                     }
                                     ?>
@@ -318,6 +326,10 @@ include "./scripts/connect.php";
     <?php include "./includes/scriptImports.php"; ?>
     <script>
         $(document).ready(function () {
+
+            // enable tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
+
             // Add click event listener to each interactive cell
             $('.interactive-cell').each(function() {
                 let cell = $(this);
