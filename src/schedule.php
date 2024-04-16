@@ -1,14 +1,16 @@
-<?php 
-    // Schedule view for non-admin users
-    session_start();
-    // Check if the session variable is set
-    if (!isset($_SESSION['username'])) {
-        // Redirect to index page
-        header('Location: index.php');
-        exit();
-    }
-    // connect to database
-    include('./scripts/connect.php'); 
+<?php
+// Schedule view for non-admin users
+session_start();
+// Check if the session variable is set
+if (!isset($_SESSION["username"])) {
+    // Redirect to index page
+    header("Location: index.php");
+    exit();
+}
+// connect to database
+include "./scripts/connect.php";
+// include Event class
+include "./models/Event.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +19,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magma Events - My Schedule</title>
-    <?php include("./includes/head.php"); ?>
+    <?php include "./includes/head.php"; ?>
 </head>
 
 <body class="d-flex flex-column vh-100">
     <!-- import nav bar -->
-    <?php include("./includes/nav.php"); ?>
+    <?php include "./includes/nav.php"; ?>
 
     <main class="flex-grow-1 p-3">
         <div class="accordion" id="scheduleAccordion">
@@ -49,37 +51,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                $uname = $_SESSION['username'];
-                                $sql = "SELECT *
-                                        FROM Events
-                                        JOIN Event_Participants
-                                        ON Events.event_name = Event_Participants.event_name
-                                        WHERE Event_Participants.username = '$uname';";
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while($row=$result->fetch_assoc()){
+                                <!-- use event class to populate table rows -->
+                                <?php
+                                $events = getEventsForUser($conn, $_SESSION["username"]);
+                                if (count($events) == 0) {
+                                    echo "<tr><td colspan='7'>No events scheduled</td></tr>";
+                                } else {
+                                    foreach ($events as $event) {
+                                        echo $event->eventToHTMLRow();
+                                    }
+                                }
                                 ?>
-                                <tr>
-                                    <td><?php echo $row['event_name']; ?></td>
-                                    <td><?php echo $row['venue_address']; ?></td>
-                                    <td><?php echo $row['venue_phone']; ?></td>
-                                    <td><?php echo $row['organizer_email']; ?></td>
-                                    <td><?php echo $row['date']; ?></td>
-                                    <td><?php echo $row['duration_hours']; ?></td>
-                                    <td>
-                                        <a href="https://www.google.com/maps/dir//<?php echo urlencode($row['venue_address']); ?>"
-                                            target="_blank" class="text-decoration-none">
-                                            <i class="fa-solid fa-map-pin"></i> Get Directions
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                                <?php } else {?>
-                                <tr class="text-center fst-italix">
-                                    <td colspan='7'>No events scheduled</td>
-                                </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -124,7 +106,7 @@
     <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container">
     </div>
 
-    <?php include('./includes/scriptImports.php'); ?>
+    <?php include "./includes/scriptImports.php"; ?>
 </body>
 
 </html>
