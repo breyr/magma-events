@@ -1,3 +1,9 @@
+// on page load
+$(document).ready(function () {
+  // enable tooltips
+  $('[data-bs-toggle="tooltip"]').tooltip();
+});
+
 // handle login
 $("#submit-login-btn").on("click", function () {
   // get login information

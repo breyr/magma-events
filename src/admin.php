@@ -326,10 +326,6 @@ include "./scripts/connect.php";
     <?php include "./includes/scriptImports.php"; ?>
     <script>
         $(document).ready(function () {
-
-            // enable tooltips
-            $('[data-bs-toggle="tooltip"]').tooltip();
-
             // Add click event listener to each interactive cell
             $('.interactive-cell').each(function() {
                 let cell = $(this);

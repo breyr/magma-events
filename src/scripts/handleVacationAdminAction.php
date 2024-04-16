@@ -51,7 +51,7 @@ if ($stmt->execute()) {
 }
 
 // reload the /admin page
-header("Location: /admin");
+header("Location: /admin.php");
 
 // close the statement and the connection
 $stmt->close();
