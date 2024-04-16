@@ -20,6 +20,8 @@ if ($res->num_rows == 1) {
     $_SESSION["firstname"] = $row["firstname"];
     $_SESSION["lastname"] = $row["lastname"];
     $_SESSION["role"] = $row["role"];
+    // redirect to my schedule page or admin page based on role
+    echo $row["role"];
 } else {
     http_response_code(400);
     echo "Login failed";
