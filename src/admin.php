@@ -9,6 +9,8 @@ if (!isset($_SESSION["username"])) {
 }
 // connect to database
 include "./scripts/connect.php";
+// include VacationRequest class
+include "./models/VacationRequests.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -271,7 +273,6 @@ include "./scripts/connect.php";
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
@@ -282,37 +283,19 @@ include "./scripts/connect.php";
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="requests-tbody">
+                                <!-- use VacationRequest to create rows -->
                                 <?php
-                                // only get pending requests
-                                $sql = 'SELECT * FROM VacationRequests WHERE request_status = "Pending";';
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) { ?>
-                                <tr>
-                                    <td><?php echo $row["id"]; ?></td>
-                                    <td><?php echo $row["username"]; ?></td>
-                                    <td><?php echo $row["first_name"]; ?></td>
-                                    <td><?php echo $row["last_name"]; ?></td>
-                                    <td><?php echo $row["vacation_days"]; ?></td>
-                                    <td><?php echo $row["reason"]; ?></td>
-                                    <td><?php echo $row["request_status"]; ?></td>
-                                    <td><?php echo $row["request_date"]; ?></td>
-                                    <td>
-                                        <button class="btn btn-outline-success btn-sm approve">Approve</button>
-                                        <button class="btn btn-outline-danger btn-sm deny">Deny</button>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                                <?php
+                                $reqs = getVacationRequests($conn);
+                                if (count($reqs) == 0) {
+                                    echo "<tr id='no-requests' class='text-center'><td colspan='10'>No pending requests</td></tr>";
                                 } else {
-                                     ?>
-                                <tr class="text-center fst-italic">
-                                    <td colspan='10'>No requests</td>
-                                </tr>
-                                <?php
+                                    foreach ($reqs as $req) {
+                                        echo $req->reqToHTMLRow();
+                                    }
                                 }
                                 ?>
+
                             </tbody>
                         </table>
                     </div>

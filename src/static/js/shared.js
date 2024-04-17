@@ -127,8 +127,8 @@ $("#submit-vacation-request").on("click", function (e) {
 // handle admin actions for vacation requests
 $(".approve, .deny").click(function () {
   // get row id, action, and row
-  // get row id, action, and row
-  const rowId = $(this).closest("tr").find("td:first").text();
+  // id is the first td in the row but hidden
+  const rowId = $(this).closest("tr").find("td").eq(0).text();
   const action = $(this).hasClass("approve") ? "approve" : "deny";
   const row = $(this).closest("tr");
   const vacationDays = $(this).closest("tr").find("td").eq(4).text();
@@ -165,6 +165,11 @@ $(".approve, .deny").click(function () {
 
       // delete the table row
       row.remove();
+
+      // if there are no more rows in the table, show the no requests message
+      if ($("#vacation-requests-table tbody tr").length === 0) {
+        $("#requests-tbody").append('<tr><td colspan="10" class="text-center">No pending requests</td></tr>');
+      }
     },
   });
 });
